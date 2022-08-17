@@ -1,13 +1,15 @@
+import 'package:flutter/material.dart';
+
 import 'location.dart';
 import 'networking.dart';
 
 const kAPIkey = 'beb815776469057b72668cae1dfefc59';
 const kOpenWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
 
-class WeatherModel {
+class WeatherModel with ChangeNotifier {
   Future<dynamic> getCityWeather(String cityName) async {
     NetworkHelper networkHelper = NetworkHelper(
-        '$kOpenWeatherMapURL?=$cityName&appid=$kAPIkey&units=metric');
+        url: '$kOpenWeatherMapURL?=$cityName&appid=$kAPIkey&units=metric');
     var weatherData = await networkHelper.getData();
     return weatherData;
   }
@@ -16,7 +18,8 @@ class WeatherModel {
     Location location = Location();
     await location.getCurrentLocation();
     NetworkHelper networkHelper = NetworkHelper(
-        '$kOpenWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$kAPIkey&units=metric');
+        url:
+            '$kOpenWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$kAPIkey&units=metric');
 
     var weatherData = await networkHelper.getData();
     return weatherData;

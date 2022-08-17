@@ -40,9 +40,7 @@ class _CityScreenState extends State<CityScreen> {
                 child: TextField(
                   decoration: kTextFieldStyle,
                   onChanged: (value) {
-                    setState(() {
-                      cityName = value;
-                    });
+                    cityName = value;
                   },
                 ),
               ),
